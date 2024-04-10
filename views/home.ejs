@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/css/output.css" rel="stylesheet" />
+</head>
+<body class="bg-dark container mx-auto">
+    <!-- Main navigation container -->
+    <nav
+    class="relative flex w-full flex-nowrap items-center justify-between bg-dark py-2  lg:flex-wrap lg:justify-start lg:py-4"
+    data-twe-navbar-ref>
+        <div class="flex w-full flex-wrap items-center justify-between px-3">
+            <div class="mx-2">
+                <a class="text-xl text-light font-bold" href="#">URL<span class="text-primary">FY</span></a>
+            </div>
+            <!-- Hamburger button for mobile view -->
+            <button
+                class="block border-0 bg-transparent px-2 text-light hover:no-underline hover:shadow-none focus:no-underline focus:shadow-none focus:outline-none focus:ring-0 lg:hidden"
+                type="button"
+                data-twe-collapse-init
+                data-twe-target="#navbarSupportedContent10"
+                aria-controls="navbarSupportedContent10"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+                <!-- Hamburger icon -->
+                <span
+                class="[&>svg]:w-7 [&>svg]:stroke-black/50">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor">
+                    <path
+                    fill-rule="evenodd"
+                    d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z"
+                    clip-rule="evenodd" />
+                </svg>
+                </span>
+            </button>
+
+            <!-- Collapsible navbar container -->
+            <div
+                class="!visible mt-2 hidden flex-grow basis-[100%] items-center lg:mt-0 lg:!flex lg:basis-auto"
+                id="navbarSupportedContent10"
+                data-twe-collapse-item>
+                <!-- Left links -->
+                <ul
+                class="list-style-none ms-auto flex flex-col ps-0 lg:mt-1 lg:flex-row"
+                data-twe-navbar-nav-ref>
+                <!-- Home link -->
+                <li
+                    class="my-4 ps-2 lg:my-0 lg:pe-1 lg:ps-2"
+                    data-twe-nav-item-ref>
+                    <a
+                    class="text-neutral-300 transition duration-200 hover:text-neutral-200 hover:ease-in-out focus:text-neutral-200 active:text-black/80 motion-reduce:transition-none lg:px-2"
+                    aria-current="page"
+                    href="#"
+                    data-twe-nav-link-ref
+                    >My Shorts</a
+                    >
+                </li>
+                <!-- Features link -->
+                <li
+                    class="mb-4 ps-2 lg:mb-0 lg:pe-1 lg:ps-0"
+                    data-twe-nav-item-ref>
+                    <a
+                    class="p-0 text-neutral-300 transition duration-200 hover:text-neutral-200 hover:ease-in-out focus:text-neutral-200 active:text-black/80 motion-reduce:transition-none lg:px-2"
+                    href="#"
+                    data-twe-nav-link-ref
+                    >Blog</a
+                    >
+                </li>
+                <!-- Pricing link -->
+                <li
+                    class="mb-4 ps-2 lg:mb-0 lg:pe-1 lg:ps-0"
+                    data-twe-nav-item-ref>
+                    <a
+                    class="p-0 text-neutral-300 transition duration-200 hover:text-neutral-200 hover:ease-in-out focus:text-neutral-200 active:text-black/80 motion-reduce:transition-none lg:px-2"
+                    href="#"
+                    data-twe-nav-link-ref
+                    >Sign Up / Sign In</a
+                    >
+                </li>
+                <!-- About link -->
+                <li
+                    class="mb-4 ps-2 lg:mb-0 lg:pe-1 lg:ps-0"
+                    data-twe-nav-item-ref>
+                    <a
+                    class="p-0 text-neutral-300 transition duration-200 hover:text-neutral-200 hover:ease-in-out focus:text-neutral-200 active:text-black/80 motion-reduce:transition-none lg:px-2"
+                    href="#"
+                    data-twe-nav-link-ref
+                    >Help</a
+                    >
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="grid grid-cols-12 gap-4 mt-10">
+        
+        <!-- Column -->
+        <div class="col-span-12 md:col-span-4">
+            <div class="max-w-sm mx-auto p-6 bg-secondary rounded-lg shadow-md">
+                <div class="mb-4">
+                  <h2 class="text-lg font-semibold text-dark mb-3">Shorten your long URL</h2>
+                  <input class="w-full  p-2 border border-gray-300 text-dark bg-secondary rounded-lg placeholder:text-light" name="orgURL" id="orgURL" type="text" placeholder="Enter long url here">
+                  <small class="w-full flex justify-end mt-1 mb-4"><span class="text-green-700 font-semibold text-sm" id="orgUrlError"></span></small>
+                  <input class="w-full  p-2 border border-gray-300 text-dark bg-secondary rounded-lg placeholder:text-light" name="shortURL"  id="shortURL" type="text" placeholder="Enter alias (Alpha-Numeric)">
+                  <small class="w-full flex justify-end mt-1"><span class="text-green-700 font-semibold text-sm" id="availabilityStatus"></span></small>
+                </div>
+                <button class="w-full p-3 bg-primary text-white rounded-lg hover:bg-primary hover:bg-opacity-85 font-semibold mb-4" type="submit" id="submitButton" disabled>Shorten URL</button>
+                <div class="mb-4">
+                  <h2 class="text-lg font-semibold text-dark mb-3">Shortened URL</h2>
+                  <div class="flex">
+                    <div class="relative flex-grow">
+                        <input class="w-full p-2 border border-gray-300 bg-secondary text-dark rounded-lg" readonly type="text" placeholder="ShortURL" value="urlfy.fun/sdfsd3sd">
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+
+        <!-- Column -->
+        <div class="col-span-12 md:col-span-8"></div>
+    
+    
+    </div>
+
+    <script src="/tw-elements/js/tw-elements.umd.min.js" type="text/javascript"></script>
+    <script src="/js/script.js" type="text/javascript"></script>
+</body>
+</html>
