@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { isUrl } = require('check-valid-url');
 
 const urlSchema = new mongoose.Schema({
     shortURL: {
@@ -9,6 +10,12 @@ const urlSchema = new mongoose.Schema({
     orgURL: {
         type: String,
         required: true,
+        validate: {
+            validator: function(v) {
+                return isUrl(v);  // Validate the original URL as well
+            },
+            message: props => `${props.value} is not a valid URL!`
+        },
     },
     urlVists : [{timestamp: {type: Number}}],
 }, {timestamps: true});

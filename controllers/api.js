@@ -1,8 +1,9 @@
 const URLMODEL = require('../models/url');
+const { isUrl } = require('check-valid-url');
 
 async function checkAliasAvailabilityHandler(req, res){
     const { alias, orgURL } = req.query;
-    if (!isValidUrl(orgURL)) {
+    if (!isUrl(orgURL)) {
         return res.status(400).json({ error: 'Invalid orgURL' });
     }
     try {
@@ -10,15 +11,6 @@ async function checkAliasAvailabilityHandler(req, res){
         res.json({ available: !aliasExists });
     } catch (error) {
         res.status(500).send('Internal Server Error');
-    }
-}
-
-function isValidUrl(urlString) {
-    try {
-        new URL(urlString);
-        return true;
-    } catch (err) {
-        return false;
     }
 }
 

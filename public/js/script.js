@@ -71,4 +71,73 @@ document.addEventListener('DOMContentLoaded', () => {
     shortURLInput.addEventListener('input', updateButtonState);
 });
 
+function copyToClipboard() {
+    const copyText = document.getElementById("resultURL");
+    const tooltip = document.getElementById("copyTooltip");
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(copyText.value)
+            .then(() => {
+                showTooltip();
+            })
+            .catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+    } else {
+        copyText.select();
+        document.execCommand("copy");
+        showTooltip();
+    }
+
+    function showTooltip() {
+        tooltip.classList.remove('opacity-0');
+        tooltip.classList.add('opacity-100');
+        setTimeout(() => {
+            tooltip.classList.remove('opacity-100');
+            tooltip.classList.add('opacity-0');
+        }, 2000);
+    }
+}
+
+
 generateShortURL();
+
+document.getElementById('urlForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+    const orgURL = document.getElementById('orgURL').value;
+    const shortURL = document.getElementById('shortURL').value;
+
+    fetch('/url', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ orgURL, shortURL })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.id) {
+            document.getElementById('resultURL').value = `urlfy.fun/${data.id}`;
+            document.getElementById('resultURL').onclick = function() {
+                copyToClipboard() // Reload the page
+            };
+            document.getElementById('urlForm').innerHTML = '';
+            const newButton = document.createElement('button');
+            newButton.textContent = 'Shorten New URL';
+            newButton.className = 'w-full p-3 bg-primary text-white rounded-lg hover:bg-primary hover:bg-opacity-85 font-semibold mt-4';
+            newButton.onclick = function() {
+                window.location.reload(); // Reload the page
+            };
+            document.getElementById('shortenedUrlContainer').appendChild(newButton);
+        } else if (data.error) {
+            document.getElementById('orgUrlError').textContent = data.error; 
+            document.getElementById('orgUrlError').className = 'text-red-700 font-semibold text-sm';
+        } else {
+            document.getElementById('resultURL').value = 'Error: No URL returned';
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        document.getElementById('resultURL').value = 'Error submitting URL';
+    });
+});
+
